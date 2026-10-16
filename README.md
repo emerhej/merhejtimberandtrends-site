@@ -6,9 +6,12 @@ Website for **Merhej Timber & Trends s.a.r.l.** — carpentry hardware and fitti
 
 ```
 public/                    The website. This folder is what gets published.
-  index.html               Home page (currently a coming-soon page)
+  index.html               Home page
+  products/                Products list and one folder per product page
+  404.html, robots.txt, sitemap.xml
   assets/css/tokens.css    Generated from the design system — do not edit
   assets/css/components.css  Copied from the design system — do not edit
+  assets/css/site.css      Site layout (header, footer, grids, page sections), tokens only
   assets/img/              Logo and site images
 design-system/             The website's copy of the brand design system (see its README)
 scripts/sync-design-system.mjs  Rebuilds public/assets/ from design-system/
@@ -24,11 +27,15 @@ npx serve public
 
 ## Publishing
 
-Any static host can serve `public/`. The domain is registered at GoDaddy; point its DNS at whichever host is chosen.
+The site is published with **GitHub Pages**. `.github/workflows/pages.yml` uploads `public/` and deploys it on every push to `main` (or run it by hand from the Actions tab).
 
-- **Cloudflare Pages:** connect this repo, framework preset *None*, build command empty, output directory `public`.
-- **Netlify:** connect this repo, build command empty, publish directory `public`.
-- **GitHub Pages:** publish `public/` with a Pages workflow (GitHub Actions → *Static HTML*, path `public`).
+One-time setup in the repository settings:
+
+1. The repository must be **public**, or the account must be on GitHub Pro — GitHub Pages is not available for private repositories on GitHub Free.
+2. Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+3. Settings → Pages → Custom domain: `merhejtimberandtrends.com`, then configure DNS at GoDaddy, then tick **Enforce HTTPS** once it becomes available.
+
+Because the deployment runs from a workflow, no `CNAME` file is needed in the repo.
 
 ## Changing the design
 
