@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Zilla+Slab:wght@500;600;700&display=swap");
+
+/* Merhej Timber & Trends — component styles. Values come from tokens.css. */
+body { margin: 0; font-family: var(--font-sans); font-size: 16px; line-height: 24px; background: var(--surface); color: var(--ink); -webkit-font-smoothing: antialiased; }
+[lang="ar"], .mtt-ar { font-family: var(--font-arabic); }
+.mtt-stage { padding: var(--space-5); display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+.mtt-stage-col { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* Focus: 2px surface gap, then a solid 2px focus ring */
+.mtt-btn:focus-visible, .mtt-card-link:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus); }
+
+/* Button */
+.mtt-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); box-sizing: border-box; height: 44px; padding: 0 var(--space-5); border-radius: var(--radius-sm); border: 1px solid transparent; font-family: var(--font-sans); font-size: 15px; line-height: 20px; font-weight: 500; text-decoration: none; cursor: pointer; transition: background-color .15s ease, border-color .15s ease, color .15s ease; white-space: nowrap; }
+.mtt-btn-sm { height: 36px; padding: 0 var(--space-3); font-size: 14px; }
+.mtt-btn-lg { height: 52px; padding: 0 var(--space-6); font-size: 16px; }
+.mtt-btn-primary { background: var(--forest); color: var(--on-forest); }
+.mtt-btn-primary:hover { background: var(--forest-deep); }
+.mtt-btn-secondary { background: transparent; color: var(--forest); border-color: var(--line-strong); }
+.mtt-btn-secondary:hover { border-color: var(--forest); background: var(--forest-soft); }
+.mtt-btn-quiet { background: transparent; color: var(--forest); padding-left: var(--space-1); padding-right: var(--space-1); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.mtt-btn-quiet:hover { text-decoration-thickness: 2px; }
+.mtt-btn[disabled], .mtt-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+
+/* Badge */
+.mtt-badge { display: inline-flex; align-items: center; gap: var(--space-1); height: 24px; padding: 0 var(--space-2); border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.mtt-badge-neutral { background: var(--surface-sunken); color: var(--ink-muted); }
+.mtt-badge-new { background: var(--brass-soft); color: var(--brass-ink); }
+.mtt-badge-category { background: transparent; color: var(--forest); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.mtt-badge-stock { background: var(--forest); color: var(--on-forest); }
+.mtt-badge-out { background: var(--rust-soft); color: var(--rust); }
+.mtt-badge[lang="ar"] { letter-spacing: 0; text-transform: none; font-size: 13px; }
+
+/* Section header */
+.mtt-sh { max-width: var(--text-max); display: flex; flex-direction: column; gap: var(--space-2); }
+.mtt-sh-center { margin: 0 auto; text-align: center; align-items: center; }
+.mtt-sh-eyebrow { margin: 0; font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--brass-ink); }
+.mtt-sh-title { margin: 0; font-family: var(--font-slab); font-size: 30px; line-height: 36px; font-weight: 600; color: var(--forest); }
+.mtt-sh-h1 .mtt-sh-title { font-size: 40px; line-height: 46px; }
+.mtt-sh-rule { width: 64px; height: 0; border: 0; border-top: var(--rule-weight) solid var(--brass); margin: var(--space-2) 0; }
+.mtt-sh-center .mtt-sh-rule { margin-left: auto; margin-right: auto; }
+.mtt-sh-intro { margin: 0; font-size: 18px; line-height: 28px; color: var(--ink-muted); }
+.mtt-sh[lang="ar"] .mtt-sh-eyebrow { letter-spacing: 0; font-size: 14px; line-height: 20px; }
+.mtt-sh[lang="ar"] .mtt-sh-title { font-family: var(--font-arabic); font-weight: 700; line-height: 44px; }
+.mtt-sh[lang="ar"] .mtt-sh-intro { font-size: 17px; line-height: 30px; }
+
+/* Product card */
+.mtt-card { display: flex; flex-direction: column; width: 100%; max-width: 320px; box-sizing: border-box; background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; transition: box-shadow .2s ease, border-color .2s ease; }
+.mtt-card:hover { box-shadow: var(--shadow-card); border-color: var(--line-strong); }
+.mtt-card-media { position: relative; aspect-ratio: 1 / 1; background: var(--surface-sunken); display: flex; align-items: center; justify-content: center; }
+.mtt-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mtt-card-ph { font-size: 12px; line-height: 16px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-muted); }
+.mtt-card-badge { position: absolute; top: var(--space-3); inset-inline-start: var(--space-3); }
+.mtt-card-body { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-4) var(--space-5) var(--space-5); flex: 1; }
+.mtt-card-cat { margin: 0; font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--brass-ink); }
+.mtt-card-name { margin: 0; font-family: var(--font-slab); font-size: 22px; line-height: 28px; font-weight: 600; color: var(--forest); }
+.mtt-card-name-ar { margin: 0; font-family: var(--font-arabic); font-size: 17px; line-height: 26px; font-weight: 600; color: var(--ink-muted); }
+.mtt-card-sum { margin: 0; font-size: 14px; line-height: 20px; color: var(--ink-muted); }
+.mtt-card-specs { margin: var(--space-1) 0 0; padding: var(--space-3) 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: auto 1fr; gap: var(--space-1) var(--space-4); font-size: 13px; line-height: 20px; }
+.mtt-card-specs dt { color: var(--ink-muted); }
+.mtt-card-specs dd { margin: 0; font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--ink); text-align: end; }
+.mtt-card-cta { margin-top: auto; padding-top: var(--space-3); }
+.mtt-card-cta .mtt-btn { width: 100%; }
+
+/* Spec table */
+.mtt-spec { width: 100%; max-width: 560px; border-collapse: collapse; font-family: var(--font-sans); }
+.mtt-spec caption { text-align: start; padding-bottom: var(--space-3); font-family: var(--font-slab); font-size: 22px; line-height: 28px; font-weight: 600; color: var(--forest); }
+.mtt-spec th, .mtt-spec td { padding: var(--space-3) 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.mtt-spec tr:first-child th, .mtt-spec tr:first-child td { border-top: var(--rule-weight) solid var(--brass); }
+.mtt-spec th { width: 42%; text-align: start; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--ink-muted); padding-inline-end: var(--space-4); }
+.mtt-spec td { font-family: var(--font-mono); font-size: 14px; line-height: 20px; font-weight: 500; color: var(--ink); }
+.mtt-spec[lang="ar"] caption { font-family: var(--font-arabic); font-weight: 700; }
+.mtt-spec[lang="ar"] th { font-family: var(--font-arabic); font-size: 15px; line-height: 24px; }
+
+/* Seal — the logo's double ring */
+.mtt-seal { position: relative; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; border-radius: var(--radius-round); border: 2px solid var(--brass); background: var(--surface); }
+.mtt-seal::after { content: ""; position: absolute; inset: 5px; border-radius: var(--radius-round); border: var(--rule-weight) solid var(--brass); pointer-events: none; }
+.mtt-seal img { width: 100%; height: 100%; border-radius: var(--radius-round); object-fit: cover; display: block; }
+.mtt-seal-text { padding: 18%; text-align: center; font-family: var(--font-slab); font-weight: 700; color: var(--forest); }
+
+/* Social post */
+.mtt-post { position: relative; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; background: var(--surface); color: var(--ink); font-family: var(--font-sans); }
+.mtt-post-forest { background: var(--forest); color: var(--on-forest); }
+.mtt-post-inner { position: relative; flex: 1; display: flex; flex-direction: column; gap: 2.2%; padding: 7.4%; min-height: 0; }
+.mtt-post-frame { position: absolute; inset: 3.3%; border: var(--rule-weight) solid var(--brass); pointer-events: none; }
+.mtt-post-eyebrow { margin: 0; font-size: 1.1em; line-height: 1.3; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--brass-ink); }
+.mtt-post-forest .mtt-post-eyebrow { color: var(--on-forest); }
+.mtt-post-forest .mtt-post-frame { border-color: var(--brass-soft); }
+.mtt-post-forest .mtt-post-rule { border-top-color: var(--brass-soft); }
+.mtt-post-title { margin: 0; font-family: var(--font-slab); font-size: 4.4em; line-height: 1.02; font-weight: 600; color: var(--forest); }
+.mtt-post-forest .mtt-post-title { color: var(--on-forest); }
+.mtt-post-title-ar { margin: 0; font-family: var(--font-arabic); font-size: 2.6em; line-height: 1.45; font-weight: 700; color: var(--ink-muted); }
+.mtt-post-forest .mtt-post-title-ar { color: var(--on-forest); opacity: .85; }
+.mtt-post-rule { width: 12%; border: 0; border-top: 2px solid var(--brass); margin: 1% 0; }
+.mtt-post-body { margin: 0; font-size: 1.6em; line-height: 1.4; color: var(--ink-muted); max-width: 80%; }
+.mtt-post-forest .mtt-post-body { color: var(--on-forest); }
+.mtt-post-media { flex: 1; min-height: 0; margin-top: 2%; background: var(--surface-sunken); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.mtt-post-forest .mtt-post-media { background: var(--forest-deep); }
+.mtt-post-media img { width: 100%; height: 100%; object-fit: contain; }
+.mtt-post-ph { font-size: 1.1em; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-muted); }
+.mtt-post-forest .mtt-post-ph { color: var(--on-forest); opacity: .7; }
+.mtt-post-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 4%; font-size: 1.2em; font-weight: 500; }
+.mtt-post-logo { flex: none; display: block; border-radius: var(--radius-round); }

@@ -1,0 +1,194 @@
+/* Merhej Timber & Trends — generated from design-system/tokens.json by scripts/sync-design-system.mjs. Do not edit by hand. */
+
+:root, [data-theme="light"] {
+  --surface: #f8f5eb;
+  --surface-raised: #fffdf7;
+  --surface-sunken: #efe9da;
+  --forest: #2d5037;
+  --forest-deep: #1e3626;
+  --forest-soft: #e4ebe2;
+  --on-forest: #f8f5eb;
+  --brass: #96783c;
+  --brass-ink: #7a5f2b;
+  --brass-soft: #f1e9d6;
+  --ink: #1d2a21;
+  --ink-muted: #56604f;
+  --line: #ddd5c2;
+  --line-strong: #7f8679;
+  --rust: #9b3a22;
+  --rust-soft: #f6e3dc;
+  --focus: var(--forest);
+  --link: var(--forest);
+  --shadow-card: 0 1px 2px rgba(29,42,33,0.06), 0 6px 18px rgba(29,42,33,0.06);
+}
+
+[data-theme="dark"] {
+  --surface: #121a15;
+  --surface-raised: #1a241e;
+  --surface-sunken: #0d130f;
+  --forest: #8dbb98;
+  --forest-deep: #a9cfb2;
+  --forest-soft: #1f3226;
+  --on-forest: #121a15;
+  --brass: #c9a866;
+  --brass-ink: #d2b577;
+  --brass-soft: #2e2716;
+  --ink: #f1ede1;
+  --ink-muted: #a9b0a2;
+  --line: #2c3830;
+  --line-strong: #6e786f;
+  --rust: #e58a6c;
+  --rust-soft: #3a1f17;
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.5);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #121a15;
+    --surface-raised: #1a241e;
+    --surface-sunken: #0d130f;
+    --forest: #8dbb98;
+    --forest-deep: #a9cfb2;
+    --forest-soft: #1f3226;
+    --on-forest: #121a15;
+    --brass: #c9a866;
+    --brass-ink: #d2b577;
+    --brass-soft: #2e2716;
+    --ink: #f1ede1;
+    --ink-muted: #a9b0a2;
+    --line: #2c3830;
+    --line-strong: #6e786f;
+    --rust: #e58a6c;
+    --rust-soft: #3a1f17;
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.5);
+  }
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --radius-0: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-round: 9999px;
+  --content-max: 1200px;
+  --text-max: 680px;
+  --rule-weight: 1px;
+  --font-slab: "Zilla Slab", Rockwell, Georgia, serif;
+  --font-sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-arabic: "IBM Plex Sans Arabic", "IBM Plex Sans", Tahoma, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+
+/* Home hero and social cover slides only; one per page or post. */
+.t-display {
+  font-family: var(--font-slab);
+  font-size: 56px;
+  line-height: 60px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Page titles and category names. */
+.t-h1 {
+  font-family: var(--font-slab);
+  font-size: 40px;
+  line-height: 46px;
+  font-weight: 600;
+}
+
+/* Section titles. */
+.t-h2 {
+  font-family: var(--font-slab);
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 600;
+}
+
+/* Product names on cards and sub-sections. */
+.t-h3 {
+  font-family: var(--font-slab);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+/* Uppercase label above a heading, in brass-ink. Echoes the spaced s.a.r.l. line under the logo. */
+.t-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Intros under h1/h2 and hero copy. */
+.t-body-lg {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+/* Default text. */
+.t-body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+/* Buttons, tabs and form labels. */
+.t-label {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+/* Card summaries and helper text. */
+.t-small {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+/* Image captions and legal lines. */
+.t-caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+/* Arabic headings and the Arabic line of bilingual product names. */
+.t-ar-heading {
+  font-family: var(--font-arabic);
+  font-size: 30px;
+  line-height: 44px;
+  font-weight: 700;
+}
+
+/* Arabic body text. */
+.t-ar-body {
+  font-family: var(--font-arabic);
+  font-size: 17px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+/* Measurements, load ratings, angles and SKUs in spec tables. Western digits in both languages. */
+.t-spec {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
