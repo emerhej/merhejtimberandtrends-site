@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://merhejtimberandtrends.com/</loc></url>
-  <url><loc>https://merhejtimberandtrends.com/products/</loc></url>
-  <url><loc>https://merhejtimberandtrends.com/products/hydraulic-hinge/</loc></url>
+<!-- Every page is listed once per language, each with links to both versions. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://merhejtimberandtrends.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://merhejtimberandtrends.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://merhejtimberandtrends.com/ar/"/></url>
+  <url><loc>https://merhejtimberandtrends.com/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://merhejtimberandtrends.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://merhejtimberandtrends.com/ar/"/></url>
+  <url><loc>https://merhejtimberandtrends.com/products/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://merhejtimberandtrends.com/products/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://merhejtimberandtrends.com/ar/products/"/></url>
+  <url><loc>https://merhejtimberandtrends.com/ar/products/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://merhejtimberandtrends.com/products/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://merhejtimberandtrends.com/ar/products/"/></url>
+  <url><loc>https://merhejtimberandtrends.com/products/hydraulic-hinge/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://merhejtimberandtrends.com/products/hydraulic-hinge/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://merhejtimberandtrends.com/ar/products/hydraulic-hinge/"/></url>
+  <url><loc>https://merhejtimberandtrends.com/ar/products/hydraulic-hinge/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://merhejtimberandtrends.com/products/hydraulic-hinge/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://merhejtimberandtrends.com/ar/products/hydraulic-hinge/"/></url>
 </urlset>

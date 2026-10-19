@@ -8,8 +8,8 @@ a { color: var(--link); }
 a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus); border-radius: var(--radius-sm); }
 .wrap { width: 100%; max-width: calc(var(--content-max) + 2 * var(--space-5)); margin: 0 auto; padding: 0 var(--space-4); }
 @media (min-width: 720px) { .wrap { padding: 0 var(--space-5); } }
-.skip { position: absolute; left: -9999px; top: var(--space-2); background: var(--surface-raised); color: var(--forest); padding: var(--space-2) var(--space-3); z-index: 10; }
-.skip:focus { left: var(--space-2); }
+.skip { position: absolute; inset-inline-start: -9999px; top: var(--space-2); background: var(--surface-raised); color: var(--forest); padding: var(--space-2) var(--space-3); z-index: 10; }
+.skip:focus { inset-inline-start: var(--space-2); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Header */
@@ -23,9 +23,12 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-3); font-size: 15px; line-height: 20px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 2px solid transparent; }
 .nav a:hover { color: var(--forest); }
 .nav a[aria-current="page"] { color: var(--forest); border-bottom-color: var(--brass); }
+/* Link to the same page in the other language, set apart by a brass hairline */
+.nav .nav-lang { margin-inline-start: var(--space-2); border-inline-start: var(--rule-weight) solid var(--brass); color: var(--forest); }
 @media (max-width: 559px) {
   .brand-name { display: none; }
   .nav a { padding: 0 var(--space-2); }
+  .nav .nav-lang { margin-inline-start: var(--space-1); }
 }
 
 /* Sections */
@@ -40,7 +43,6 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .hero .wrap { display: grid; gap: var(--space-7); align-items: center; }
 .hero-copy { display: flex; flex-direction: column; gap: var(--space-4); max-width: 600px; }
 .hero-title { margin: 0; color: var(--forest); font-size: 40px; line-height: 46px; }
-.hero-ar { margin: 0; color: var(--ink-muted); }
 .hero-intro { margin: 0; color: var(--ink-muted); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-2); }
 @media (min-width: 900px) {
@@ -55,6 +57,7 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .door-knob { position: absolute; right: 12%; top: 52%; width: 14px; height: 14px; border-radius: var(--radius-round); background: var(--surface); }
 .door-frame { position: absolute; left: 12%; top: 6%; width: 66%; height: 84%; border: 3px solid var(--brass); border-bottom: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
 .door-ground { position: absolute; left: 2%; right: 2%; top: 90%; border-top: var(--rule-weight) solid var(--brass); }
+[dir="rtl"] .door-art { transform: scaleX(-1); }
 
 /* Grids */
 .grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr; }
@@ -108,7 +111,6 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .dg-label { fill: var(--ink-muted); font-family: var(--font-sans); font-size: 12px; }
 .product-info { display: flex; flex-direction: column; gap: var(--space-4); }
 .product-info h1 { margin: 0; color: var(--forest); }
-.product-ar { margin: 0; color: var(--ink-muted); }
 .product-lead { margin: 0; color: var(--ink-muted); }
 .product-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .product-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
@@ -117,7 +119,6 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .features svg { width: 20px; height: 20px; margin-top: 2px; color: var(--forest); }
 .product-block { display: flex; flex-direction: column; gap: var(--space-4); padding-top: var(--space-5); }
 .product-block h2 { margin: 0; color: var(--forest); }
-.desc-ar { margin: 0; color: var(--ink-muted); }
 .note { margin: 0; color: var(--ink-muted); }
 
 /* Footer */
@@ -130,3 +131,35 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .site-footer a { color: var(--on-forest); }
 .foot-brand { font-family: var(--font-slab); font-size: 22px; line-height: 28px; font-weight: 600; margin-bottom: var(--space-2) !important; }
 .foot-legal { grid-column: 1 / -1; padding-top: var(--space-5); border-top: 1px solid var(--brass); font-size: 12px; line-height: 16px; }
+
+/* Arabic pages (/ar/): <html lang="ar" dir="rtl">. Layout mirrors through logical
+   properties; these rules switch headings to IBM Plex Sans Arabic, give Arabic its
+   taller line heights and drop the Latin uppercase tracking. Spec values keep
+   dir="ltr", Western digits and IBM Plex Mono. */
+:lang(ar) body { font-family: var(--font-arabic); line-height: 28px; }
+:lang(ar) .t-display, :lang(ar) .t-h1, :lang(ar) .t-h2, :lang(ar) .t-h3,
+:lang(ar) .mtt-sh-title, :lang(ar) .mtt-card-name, :lang(ar) .mtt-spec caption {
+  font-family: var(--font-arabic); font-weight: 700; letter-spacing: 0;
+}
+:lang(ar) .hero-title { line-height: 60px; }
+@media (min-width: 900px) { :lang(ar) .hero-title { line-height: 80px; } }
+:lang(ar) .t-h1 { line-height: 60px; }
+:lang(ar) .t-h2, :lang(ar) .mtt-sh-title { line-height: 44px; }
+:lang(ar) .t-h3, :lang(ar) .mtt-card-name, :lang(ar) .mtt-spec caption { line-height: 34px; }
+:lang(ar) .t-eyebrow, :lang(ar) .mtt-sh-eyebrow, :lang(ar) .mtt-card-cat, :lang(ar) .mtt-card-ph,
+:lang(ar) .site-footer h2, :lang(ar) .photo-ph .t-caption {
+  letter-spacing: 0 !important; text-transform: none !important; font-size: 14px; line-height: 20px;
+}
+:lang(ar) .mtt-badge { letter-spacing: 0; text-transform: none; font-size: 13px; }
+:lang(ar) .t-body-lg, :lang(ar) .mtt-sh-intro { font-size: 18px; line-height: 32px; }
+:lang(ar) .t-body { font-size: 17px; line-height: 30px; }
+:lang(ar) .t-small, :lang(ar) .mtt-card-sum, :lang(ar) .crumbs { line-height: 24px; }
+:lang(ar) .mtt-spec th { font-size: 15px; line-height: 24px; }
+:lang(ar) .dg-label { font-family: var(--font-arabic); font-size: 13px; }
+:lang(ar) .mtt-spec td:not([dir="ltr"]) { font-family: var(--font-arabic); font-size: 15px; line-height: 24px; }
+
+/* 404.html holds both languages; a script switches <html> to Arabic for /ar/ addresses. */
+html:not([lang="ar"]) .lang-ar, html[lang="ar"] .lang-en { display: none; }
+/* Measurements keep dir="ltr"; line them up with the start of the Arabic table and the end of the card row. */
+:lang(ar) .mtt-spec td[dir="ltr"] { text-align: end; }
+:lang(ar) .mtt-card-specs dd[dir="ltr"] { text-align: start; }

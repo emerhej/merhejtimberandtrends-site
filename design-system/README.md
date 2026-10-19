@@ -34,4 +34,4 @@ Every page loads, in this order:
 - Type styles are classes prefixed `t-`: `t-display`, `t-h1`, `t-h2`, `t-h3`, `t-eyebrow`, `t-body-lg`, `t-body`, `t-label`, `t-small`, `t-caption`, `t-ar-heading`, `t-ar-body`, `t-spec`.
 - Components are plain HTML with the `mtt-` classes; their markup matches the React components in the design system (see each component's preview there).
 - Dark mode follows the visitor's system setting. Put `data-theme="light"` on `<html>` to force the ivory theme.
-- Arabic blocks get `lang="ar" dir="rtl"`.
+- Arabic pages (under `public/ar/`) have `<html lang="ar" dir="rtl">`; their Arabic type adjustments are at the end of `public/assets/css/site.css`.

@@ -10,8 +10,15 @@ This is the website for Merhej Timber & Trends s.a.r.l. (merhejtimberandtrends.c
 - Use the logo file as supplied; never redraw the mark.
 
 ## Site rules
-- Plain static HTML/CSS in `public/`; no framework or build step unless the owner agrees to one. Hosted on GitHub Pages: `.github/workflows/pages.yml` deploys `public/` on every push to `main`. Use relative links between pages and assets so the site works on any host. Add every new page to `public/sitemap.xml`.
-- Bilingual: English first, Arabic product names under English ones; Arabic blocks use `lang="ar" dir="rtl"`.
+- Plain static HTML/CSS in `public/`; no framework or build step unless the owner agrees to one. Hosted on GitHub Pages: `.github/workflows/pages.yml` deploys `public/` on every push to `main`. Use relative links between pages and assets so the site works on any host. Add every new page to `public/sitemap.xml` in both languages.
+- Two languages on separate pages: English at `public/<path>`, Arabic at `public/ar/<path>` with the same structure, ids, links and numbers. English pages contain no Arabic (apart from the header's language link); Arabic pages have `<html lang="ar" dir="rtl">` and keep only the brand name, domain and measurements in Latin. Every change goes into both languages in the same commit. `404.html` is the one exception: it holds both languages and picks by address.
 - No online selling yet (planned in about two years): calls to action are "Request a quote", "Ask on WhatsApp", "Visit us". No cart or prices unless asked.
 - Products come from the Product Catalogue sheet in the "Merhej Timber and Trends" Google Drive folder (02 Products); show only rows with "Show on website" = Yes. Never invent specs.
 - Pages must work at phone width first; check contrast stays as the design system specifies.
+
+## Skills and checks (use them for every website task)
+- `.claude/skills/site-page` — any change to a page, the header, footer or nav; `arabic.md` there has the Arabic voice rules and glossary.
+- `.claude/skills/site-product` — adding, updating or removing products from the Product Catalogue sheet.
+- `.claude/skills/site-design-sync` — bringing design system changes into the site.
+- `.claude/skills/site-publish` — checks, screenshots, commit, push and confirming the live site.
+- `node scripts/check-site.mjs` must pass before every commit. When you add a site rule, add a check for it there too.
