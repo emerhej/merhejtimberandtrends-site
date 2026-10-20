@@ -69,6 +69,26 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().send_error(code, message, explain)
 
 
+def serve():
+    """Serve public/ on a free local port, with 404.html for missing pages like GitHub Pages."""
+    handler = functools.partial(Handler, directory=str(PUBLIC))
+    srv = socketserver.TCPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    return srv, srv.server_address[1]
+
+
+def route_fonts(ctx, mods, css):
+    """Answer Google Fonts requests with the same fonts installed from npm."""
+    def fonts(route):
+        url = route.request.url
+        if "fonts.googleapis.com" in url:
+            return route.fulfill(status=200, content_type="text/css", body=css)
+        pkg, name = re.search(r"fonts\.local/([^/]+)/files/(.+)$", url).groups()
+        route.fulfill(status=200, content_type="font/woff2", body=(mods / pkg / "files" / name).read_bytes())
+    ctx.route("https://fonts.googleapis.com/**", fonts)
+    ctx.route("https://fonts.local/**", fonts)
+
+
 def main():
     from playwright.sync_api import sync_playwright
 
@@ -77,26 +97,16 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     mods = ensure_fonts()
     css = font_css(mods)
-
-    handler = functools.partial(Handler, directory=str(PUBLIC))
-    srv = socketserver.TCPServer(("127.0.0.1", 0), handler)
-    port = srv.server_address[1]
-    threading.Thread(target=srv.serve_forever, daemon=True).start()
-
-    def fonts(route):
-        url = route.request.url
-        if "fonts.googleapis.com" in url:
-            return route.fulfill(status=200, content_type="text/css", body=css)
-        pkg, name = re.search(r"fonts\.local/([^/]+)/files/(.+)$", url).groups()
-        route.fulfill(status=200, content_type="font/woff2", body=(mods / pkg / "files" / name).read_bytes())
+    srv, port = serve()
 
     wide = []
     with sync_playwright() as p:
         browser = p.chromium.launch()
         for width in WIDTHS:
-            ctx = browser.new_context(viewport={"width": width, "height": 900}, color_scheme="light")
-            ctx.route("https://fonts.googleapis.com/**", fonts)
-            ctx.route("https://fonts.local/**", fonts)
+            ctx = browser.new_context(viewport={"width": width, "height": 900}, color_scheme="light",
+                                      is_mobile=width < 768, has_touch=width < 768,
+                                      device_scale_factor=2 if width < 768 else 1)
+            route_fonts(ctx, mods, css)
             page = ctx.new_page()
             for t in targets:
                 page.goto(f"http://127.0.0.1:{port}{t}", wait_until="networkidle")

@@ -30,7 +30,8 @@ English lives at `/`, Arabic at `/ar/`, page for page (`/products/hydraulic-hing
 ## Check before publishing
 
 ```
-node scripts/check-site.mjs
+node scripts/check-site.mjs                                   # pages, languages, links, sitemap
+python3 .claude/skills/site-publish/scripts/mobile_check.py   # every page on phone and tablet sizes (needs Playwright)
 ```
 
 ## Preview locally

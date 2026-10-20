@@ -9,7 +9,10 @@
 //   cards, and the same numbers in every spec table and card spec list.
 // - Header and footer are identical on every page of the same language.
 // - Every link and image resolves to a file in public/, and every #anchor exists.
-// - No hard-coded colours in site.css or in style attributes; every <img> has alt.
+// - No hard-coded colours in site.css or in style attributes; every <img> has alt, width and height.
+// - Phone basics: viewport tag that allows zooming, home-screen icon, theme colour, language link
+//   outside the main nav, no fixed widths over 320px in style attributes.
+//   (The full phone check, in a real browser, is .claude/skills/site-publish/scripts/mobile_check.py.)
 // - sitemap.xml lists every page, and nothing else.
 // No dependencies. Exits with code 1 and a list of problems if anything fails.
 
@@ -115,6 +118,16 @@ for (const f of pages) {
     if (hit) fail(f, `English page contains Arabic text: "${hit.trim().slice(0, 60)}" — it belongs on ${twinOf(f)}`);
   }
 
+  // phones: the viewport tag must fit the screen and must not block zooming
+  const vp = metaVal('name', 'viewport');
+  if (!/width=device-width/.test(vp) || !/initial-scale=1/.test(vp)) fail(f, 'needs <meta name="viewport" content="width=device-width, initial-scale=1">');
+  if (/user-scalable\s*=\s*(no|0)|maximum-scale\s*=\s*1(\.0)?\b/.test(vp)) fail(f, 'viewport must not block zooming (no user-scalable=no / maximum-scale=1)');
+  if (!links.some((t) => attr(t, 'rel') === 'apple-touch-icon')) fail(f, 'missing <link rel="apple-touch-icon"> (home-screen icon on phones)');
+  if (!meta.some((t) => attr(t, 'name') === 'theme-color')) fail(f, 'missing <meta name="theme-color"> (phone browser bar colour)');
+  // the language link sits outside the main nav so phones can show it beside the logo
+  const navBlock = section(s, '<nav class="nav"', '</nav>');
+  if (/class="[^"]*\bnav-lang\b/.test(navBlock)) fail(f, 'the language link (.nav-lang) must come after </nav>, not inside the main nav');
+
   // Arabic pages: a degree value inside Arabic text flips to "°85" unless it sits in a dir="ltr" element
   if (ar) {
     let body = s.slice(s.indexOf('<body'))
@@ -140,7 +153,14 @@ for (const f of pages) {
       if (!ids(tsrc).has(r.frag)) fail(f, `link ${l} points to #${r.frag}, which ${target} does not have`);
     }
   }
-  for (const t of tags(s, 'img')) if (attr(t, 'alt') === undefined) fail(f, `<img> without alt: ${t}`);
+  for (const t of tags(s, 'img')) {
+    if (attr(t, 'alt') === undefined) fail(f, `<img> without alt: ${t}`);
+    if (!attr(t, 'width') || !attr(t, 'height')) fail(f, `<img> needs width and height so the page doesn't jump while loading on phones: ${t}`);
+  }
+  for (const t of s.match(/\sstyle="[^"]*"/g) || []) {
+    const w = t.match(/(?:^|[;"\s])(?:min-)?width:\s*(\d+)px/);
+    if (w && +w[1] > 320) fail(f, `fixed width ${w[1]}px in ${t.trim()} is wider than a small phone — use max-width or a CSS class`);
+  }
   for (const t of s.match(/\sstyle="[^"]*"/g) || []) {
     if (/#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(/i.test(t)) fail(f, `hard-coded colour in ${t.trim()} — use a design-system variable`);
   }
@@ -211,8 +231,9 @@ for (const f of pages) if (!locs.includes(SITE + urlOf(f))) problems.push(`sitem
 for (const l of locs) if (!pages.some((f) => SITE + urlOf(f) === l)) problems.push(`sitemap.xml: lists ${l}, which has no page`);
 
 // ---------- report ----------
-if (problems.length) {
-  console.error(`✗ ${problems.length} problem(s):\n` + problems.map((p) => '  - ' + p).join('\n'));
+const unique = [...new Set(problems)];
+if (unique.length) {
+  console.error(`✗ ${unique.length} problem(s):\n` + unique.map((p) => '  - ' + p).join('\n'));
   process.exit(1);
 }
 console.log(`✓ ${pages.length} pages (${pages.filter((f) => !isAr(f)).length} English + ${pages.filter(isAr).length} Arabic) and 404.html pass every check.`);

@@ -12,24 +12,29 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .skip:focus { inset-inline-start: var(--space-2); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Header */
+/* Header: brand, main nav and the other-language link in one row from 720px;
+   on phones the nav drops to a second row of full-width tabs. */
 .site-header { border-bottom: 1px solid var(--line); background: var(--surface); }
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 72px; }
-.brand { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: var(--forest); }
-.brand img { width: 48px; height: 48px; border-radius: var(--radius-round); }
+.site-header .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--space-4); min-height: 72px; }
+.brand { display: flex; align-items: center; gap: var(--space-3); min-height: 48px; margin-inline-end: auto; text-decoration: none; color: var(--forest); }
+.brand img { flex: none; width: 48px; height: 48px; border-radius: var(--radius-round); }
 .brand-name { font-family: var(--font-slab); font-size: 18px; line-height: 22px; font-weight: 700; }
-.brand-name small { display: block; font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 500; letter-spacing: .16em; color: var(--brass-ink); }
-.nav { display: flex; gap: var(--space-1); }
-.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-3); font-size: 15px; line-height: 20px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 2px solid transparent; }
+.brand-name small { display: block; font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .16em; color: var(--brass-ink); }
+.nav { display: flex; gap: var(--space-2); }
+.nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 var(--space-3); font-size: 15px; line-height: 20px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 2px solid transparent; }
 .nav a:hover { color: var(--forest); }
 .nav a[aria-current="page"] { color: var(--forest); border-bottom-color: var(--brass); }
 /* Link to the same page in the other language, set apart by a brass hairline */
-.nav .nav-lang { margin-inline-start: var(--space-2); border-inline-start: var(--rule-weight) solid var(--brass); color: var(--forest); }
-@media (max-width: 559px) {
-  .brand-name { display: none; }
-  .nav a { padding: 0 var(--space-2); }
-  .nav .nav-lang { margin-inline-start: var(--space-1); }
+.nav-lang { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-3); border-inline-start: var(--rule-weight) solid var(--brass); font-size: 15px; line-height: 20px; font-weight: 500; color: var(--forest); text-decoration: none; }
+.nav-lang:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 719px) {
+  .site-header .wrap { min-height: 0; padding-top: var(--space-2); }
+  .brand img { width: 44px; height: 44px; }
+  .brand-name { font-size: 16px; line-height: 20px; }
+  .nav { order: 3; flex: 1 0 calc(100% + 2 * var(--space-4)); gap: 0; margin: var(--space-2) calc(-1 * var(--space-4)) 0; border-top: 1px solid var(--line); }
+  .nav a { flex: 1 1 0; min-height: 48px; padding: 0 var(--space-2); }
 }
+@media (max-width: 359px) { .brand-name { display: none; } }
 
 /* Sections */
 .section { padding: var(--space-8) 0; }
@@ -58,6 +63,12 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .door-frame { position: absolute; left: 12%; top: 6%; width: 66%; height: 84%; border: 3px solid var(--brass); border-bottom: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
 .door-ground { position: absolute; left: 2%; right: 2%; top: 90%; border-top: var(--rule-weight) solid var(--brass); }
 [dir="rtl"] .door-art { transform: scaleX(-1); }
+@media (max-width: 599px) {
+  .hero { padding: var(--space-7) 0 var(--space-8); }
+  .hero .wrap { gap: var(--space-6); }
+  .door-art { max-width: 200px; }
+  .hero-actions .mtt-btn { flex: 1 1 auto; }
+}
 
 /* Grids */
 .grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr; }
@@ -88,14 +99,18 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .contact-card p { margin: 0; color: var(--ink-muted); }
 
 /* Breadcrumb */
-.crumbs { padding-top: var(--space-5); font-size: 14px; line-height: 20px; color: var(--ink-muted); }
-.crumbs ol { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.crumbs { padding-top: var(--space-3); font-size: 14px; line-height: 20px; color: var(--ink-muted); }
+.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--space-2); margin: 0; padding: 0; list-style: none; }
+.crumbs li { display: flex; align-items: center; min-height: 44px; }
+.crumbs a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; }
 .crumbs li + li::before { content: "/"; margin-inline-end: var(--space-2); color: var(--line-strong); }
 .crumbs a { color: var(--ink-muted); }
 
 /* Product page */
-.product { display: grid; gap: var(--space-7); padding: var(--space-6) 0 var(--space-8); }
-@media (min-width: 900px) { .product { grid-template-columns: 1fr 1fr; padding-bottom: var(--space-9); } }
+.product { display: grid; gap: var(--space-7); padding: var(--space-5) 0 var(--space-8); }
+@media (min-width: 720px) { .product { grid-template-columns: 1fr 1fr; gap: var(--space-6); } }
+@media (min-width: 900px) { .product { gap: var(--space-7); padding-bottom: var(--space-9); } }
+
 .product-media { display: flex; flex-direction: column; gap: var(--space-4); }
 .photo-ph { aspect-ratio: 1 / 1; background: var(--surface-sunken); border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); color: var(--ink-muted); text-align: center; padding: var(--space-5); }
 .photo-ph svg { width: 96px; height: auto; }
@@ -108,7 +123,12 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .dg-wall { fill: var(--ink-muted); }
 .dg-door { fill: var(--forest); }
 .dg-text { fill: var(--ink); font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
-.dg-label { fill: var(--ink-muted); font-family: var(--font-sans); font-size: 12px; }
+.dg-legend { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); color: var(--ink); }
+.dg-legend li { display: flex; align-items: center; gap: var(--space-2); }
+.dg-key { flex: none; width: 28px; height: 4px; border-radius: var(--radius-sm); background: var(--forest); }
+.dg-key-hold { background: repeating-linear-gradient(90deg, var(--brass) 0 7px, transparent 7px 11px); }
+@media (max-width: 899px) { .dg-text { font-size: 18px; } }
+@media (max-width: 599px) { .diagram { padding: var(--space-4); } }
 .product-info { display: flex; flex-direction: column; gap: var(--space-4); }
 .product-info h1 { margin: 0; color: var(--forest); }
 .product-lead { margin: 0; color: var(--ink-muted); }
@@ -120,14 +140,30 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 .product-block { display: flex; flex-direction: column; gap: var(--space-4); padding-top: var(--space-5); }
 .product-block h2 { margin: 0; color: var(--forest); }
 .note { margin: 0; color: var(--ink-muted); }
-
+/* Phones: name first, then photo, details, diagram, specs (desktop keeps media | info columns) */
+@media (max-width: 719px) {
+  .product { display: flex; flex-direction: column; gap: var(--space-4); }
+  .product-media, .product-info { display: contents; }
+  .product-info > .t-eyebrow { order: 1; }
+  .product-info > h1 { order: 2; }
+  .product-tags { order: 3; }
+  .product-media > :first-child { order: 4; }
+  .product-lead { order: 5; }
+  .product-actions { order: 6; }
+  .product-block { order: 7; }
+  .diagram { order: 8; }
+  .product-block#specs { order: 9; }
+  .photo-ph { aspect-ratio: 4 / 3; }
+  .product-actions .mtt-btn-primary { flex: 1 1 100%; }
+}
 /* Footer */
 .site-footer { background: var(--forest-deep); color: var(--on-forest); padding: var(--space-7) 0 var(--space-6); }
 .site-footer .wrap { display: grid; gap: var(--space-6); }
 @media (min-width: 720px) { .site-footer .wrap { grid-template-columns: 1.5fr 1fr 1fr; } }
 .site-footer h2 { margin: 0 0 var(--space-3); font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--on-forest); }
 .site-footer p { margin: 0; }
-.site-footer ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+.site-footer ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.site-footer li a { display: inline-flex; align-items: center; min-height: 44px; }
 .site-footer a { color: var(--on-forest); }
 .foot-brand { font-family: var(--font-slab); font-size: 22px; line-height: 28px; font-weight: 600; margin-bottom: var(--space-2) !important; }
 .foot-legal { grid-column: 1 / -1; padding-top: var(--space-5); border-top: 1px solid var(--brass); font-size: 12px; line-height: 16px; }
@@ -155,7 +191,6 @@ a:focus-visible, button:focus-visible { outline: none; box-shadow: 0 0 0 2px var
 :lang(ar) .t-body { font-size: 17px; line-height: 30px; }
 :lang(ar) .t-small, :lang(ar) .mtt-card-sum, :lang(ar) .crumbs { line-height: 24px; }
 :lang(ar) .mtt-spec th { font-size: 15px; line-height: 24px; }
-:lang(ar) .dg-label { font-family: var(--font-arabic); font-size: 13px; }
 :lang(ar) .mtt-spec td:not([dir="ltr"]) { font-family: var(--font-arabic); font-size: 15px; line-height: 24px; }
 
 /* 404.html holds both languages; a script switches <html> to Arabic for /ar/ addresses. */
@@ -163,3 +198,6 @@ html:not([lang="ar"]) .lang-ar, html[lang="ar"] .lang-en { display: none; }
 /* Measurements keep dir="ltr"; line them up with the start of the Arabic table and the end of the card row. */
 :lang(ar) .mtt-spec td[dir="ltr"] { text-align: end; }
 :lang(ar) .mtt-card-specs dd[dir="ltr"] { text-align: start; }
+
+/* Product card names are links: give them a 44px tap height without changing the card's layout. */
+.mtt-card-name a { display: block; padding-block: var(--space-2); margin-block: calc(-1 * var(--space-2)); }
