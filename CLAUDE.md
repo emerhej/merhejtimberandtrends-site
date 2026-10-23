@@ -8,6 +8,7 @@ This is the website for Merhej Timber & Trends s.a.r.l. (merhejtimberandtrends.c
 - Use only the tokens in `design-system/tokens.json` (as CSS variables from `public/assets/css/tokens.css`) and the `mtt-` classes from `components.css`. No hard-coded colours, font sizes or spacing.
 - Never edit `public/assets/css/tokens.css` or `components.css` by hand. Change `design-system/`, then run `node scripts/sync-design-system.mjs`. If the design system artifact changed, copy its `tokens.json` and `components/bundle.css` here first.
 - Use the logo file as supplied; never redraw the mark.
+- `design-system/BRAND-PACK.md` is the one-file brand pack for teammates and other AI tools, with a copy in Google Drive (01 Brand). It is generated: change `tokens.json`, `brand-book.md` or `team-notes.md`, then run `node scripts/build-brand-pack.mjs`. Update `team-notes.md` when pages, hosting or Drive folders change. See the site-design-sync skill for refreshing the Drive copy.
 
 ## Site rules
 - Plain static HTML/CSS in `public/`; no framework or build step unless the owner agrees to one. Hosted on GitHub Pages: `.github/workflows/pages.yml` deploys `public/` on every push to `main`. Use relative links between pages and assets so the site works on any host. Add every new page to `public/sitemap.xml` in both languages.

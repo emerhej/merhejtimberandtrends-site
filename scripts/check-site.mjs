@@ -14,11 +14,13 @@
 //   outside the main nav, no fixed widths over 320px in style attributes.
 //   (The full phone check, in a real browser, is .claude/skills/site-publish/scripts/mobile_check.py.)
 // - sitemap.xml lists every page, and nothing else.
+// - design-system/BRAND-PACK.md matches its sources (rebuild with node scripts/build-brand-pack.mjs).
 // No dependencies. Exits with code 1 and a list of problems if anything fails.
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname, relative, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildBrandPack, BRAND_PACK } from './build-brand-pack.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const pub = join(root, 'public');
@@ -229,6 +231,10 @@ const sitemap = readFileSync(join(pub, 'sitemap.xml'), 'utf8');
 const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 for (const f of pages) if (!locs.includes(SITE + urlOf(f))) problems.push(`sitemap.xml: missing ${SITE + urlOf(f)}`);
 for (const l of locs) if (!pages.some((f) => SITE + urlOf(f) === l)) problems.push(`sitemap.xml: lists ${l}, which has no page`);
+
+// ---------- brand pack ----------
+if (!existsSync(BRAND_PACK) || readFileSync(BRAND_PACK, 'utf8') !== buildBrandPack())
+  problems.push('design-system/BRAND-PACK.md: out of date — run node scripts/build-brand-pack.mjs and commit it (then refresh the Drive copy, see the site-design-sync skill)');
 
 // ---------- report ----------
 const unique = [...new Set(problems)];
